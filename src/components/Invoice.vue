@@ -4,6 +4,11 @@
         <div class="mb-10">
             <h2 class="text-2xl font-bold mb-4">Квитансия маълумотларини киритинг</h2>
             <form class="grid grid-cols-2 gap-6">
+                <div class="col-span-2">
+                    <label class="block font-semibold mb-2">КИРИМ ҒАЗНА ОРДЕРИ №:</label>
+                    <input v-model="paymentNumber" type="number" class="border border-gray-300 p-2 rounded w-1/2" />
+                </div>
+
                 <!-- Payment Amount -->
                 <div>
                     <label class="block font-semibold mb-2">Тўлов суммаси (сўм - рақамларда):</label>
@@ -56,11 +61,11 @@
 
         <!-- Invoice Layout Section (preview) -->
         <div ref="invoiceSection" class="p-10 bg-white border border-gray-300 rounded-lg max-w-3xl mx-auto">
-            <div class="flex justify-between items-center text-center mt-4 mb-6">
+            <div class="grid grid-cols-3 gap-4 items-center justify-start mt-4 mb-6">
                 <div>
-                    <img src="../assets/kungfu-logo.png" alt="Logo" class="h-24 mx-auto" />
+                    <img src="../assets/kungfu-logo.png" alt="Logo" class="h-24 mr-auto" />
                 </div>
-                <div>
+                <div class="col-span-2">
                     <h2 class="text-xl font-bold">КИРИМ ҒАЗНА ОРДЕРИ № <span class="underline">{{ paymentNumber
                             }}</span></h2>
                 </div>
@@ -99,9 +104,14 @@
                 </div>
             </div>
 
-            <div class="mb-4">
-                <label class="font-bold">Пулни қабул қилган шахс:</label>
-                <div class="font-semibold underline p-2 rounded">{{ cashier }}</div>
+            <div class="grid grid-cols-2 items-center justify-start gap-4 mb-4">
+                <div>
+                    <label class="font-bold">Пулни қабул қилган шахс:</label>
+                    <div class="font-semibold underline p-2 rounded">{{ cashier }}</div>
+                </div>
+                <div>
+                    <img src="../assets/stamp.png" alt="stamp" class="h-36 mr-auto" />
+                </div>
             </div>
         </div>
 
@@ -131,9 +141,6 @@ export default {
             cashier: '',
             totalAmount: '',
         };
-    },
-    mounted() {
-        this.paymentNumber = Date.now() + Math.floor(Math.random() * 1000);
     },
     methods: {
         async generatePDF() {
